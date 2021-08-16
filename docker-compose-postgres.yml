@@ -1,0 +1,26 @@
+version: '3'
+services:      
+  postgres:
+    image: postgres:12
+    hostname: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+    ports:
+      - '5432:5432'
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    hostname: pgadmin4
+    container_name: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=test@example.com
+      - PGADMIN_DEFAULT_PASSWORD=test
+      - PGADMIN_CONFIG_LOGIN_BANNER="Database Server"
+      - PGADMIN_LISTEN_PORT=18080
+    ports:
+      - '18080:18080'
+    depends_on:
+      - postgres
